@@ -1,6 +1,3 @@
-let playerScore = 0;
-let computerScore = 0;
-
 //randomly returns either Rock, Paper, or Scissors
 function computerPlay() {
   const items = ["rock", "paper", "scissors"];
@@ -16,50 +13,58 @@ function playerPlay() {
 function playRound(playerSelection, computerSelection) {
   computerSelection = computerSelection.toLowerCase();
   playerSelection = playerSelection.toLowerCase();
+  let computerScore = 0;
+  let playerScore = 0;
 
   if (playerSelection === computerSelection) {
-    return "Tie";
+    console.log("Tie");
   } else if (playerSelection === "rock") {
     if (computerSelection === "paper") {
+      console.log("Computer won");
       ++computerScore;
-      return "Computer won";
+      return computerScore;
     } else {
+      console.log("Player won");
       ++playerScore;
-      return "Player won";
+      return playerScore;
     }
   } else if (playerSelection === "scissors") {
     if (computerSelection === "rock") {
+      console.log("Computer won");
       ++computerScore;
-      return "Computer won";
+      return computerScore;
     } else {
+      console.log("Player won");
       ++playerScore;
-      return "Player won";
+      return playerScore;
     }
   } else if (playerSelection === "paper") {
     if (computerSelection === "scissors") {
+      console.log("Computer won");
       ++computerScore;
-      return "Computer won";
+      return computerScore;
     } else {
+      console.log("Player won");
       ++playerScore;
-      return "Player won";
+      return playerScore;
     }
   }
 }
 
 //plays 5 round of playRound and displays result for each round
-function game(playerScore, computerScore) {
+function game(computerScore, playerScore) {
   for (let round = 1; round < 6; round++) {
     const computerSelection = computerPlay();
     const playerSelection = playerPlay();
-    console.log(
-      `Round ${round} Result: ${playRound(playerSelection, computerSelection)}`
-    );
+    console.log(playRound(playerSelection, computerSelection));
   }
   if (computerScore > playerScore) {
-    console.log("The winner for this round is COMPUTER");
-  } else if (computerScore === playerScore) {
-    console.log("Tie game");
-  } else {
-    console.log("The winner for this round is PLAYER");
+    console.log("Winner for this game: COMPUTER");
+  }
+  if (playerScore > computerScore) {
+    console.log("Winner for this game: PLAYER");
+  }
+  if (computerScore === playerScore) {
+    console.log("There is no winner for this game: TIE GAME");
   }
 }
