@@ -4,11 +4,26 @@ function computerPlay() {
   return items[~~(Math.random() * items.length)].toString();
 }
 
-//prompts player to type in either rock, paper or scissors
-function playerPlay() {
-  const playerChoice = prompt("Choose either rock, paper, or scissors");
-  return playerChoice;
-}
+//event listener to the buttons that call playRound function with the correct playerSelection
+const rock = document.querySelector("#rock");
+rock.addEventListener("click", () => {
+  playRound.playerSelection === "rock";
+});
+
+const paper = document.querySelector("#paper");
+paper.addEventListener("click", () => {
+  playRound.playerSelection === "paper";
+});
+
+const scissors = document.querySelector("#scissors");
+scissors.addEventListener("click", () => {
+  playRound.playerSelection === "scissors";
+});
+
+//add a div for displaying results
+const results = document.createElement("div");
+results.setAttribute("id", "results");
+results.textContent = playRound.computerScore + playRound.playerScore;
 
 //plays a single round (main game logic)
 function playRound(playerSelection, computerSelection) {
@@ -51,8 +66,3 @@ function playRound(playerSelection, computerSelection) {
     }
   }
 }
-
-//event listener to the buttons that call playRound function with the correct playerSelection
-const rock = document.getElementById("rock");
-const paper = document.getElementById("paper");
-const scissors = document.getElementById("scissors");
