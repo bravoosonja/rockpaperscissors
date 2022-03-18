@@ -4,12 +4,13 @@ function computerPlay() {
   return items[~~(Math.random() * items.length)].toString();
 }
 
+//prompts player to type in either rock, paper or scissors
 function playerPlay() {
   const playerChoice = prompt("Choose either rock, paper, or scissors");
   return playerChoice;
 }
 
-//plays a single round
+//plays a single round (main game logic)
 function playRound(playerSelection, computerSelection) {
   computerSelection = computerSelection.toLowerCase();
   playerSelection = playerSelection.toLowerCase();
@@ -21,50 +22,37 @@ function playRound(playerSelection, computerSelection) {
   } else if (playerSelection === "rock") {
     if (computerSelection === "paper") {
       console.log("Computer won");
-      ++computerScore;
+      computerScore += 1;
       return computerScore;
     } else {
       console.log("Player won");
-      ++playerScore;
+      playerScore += 1;
       return playerScore;
     }
   } else if (playerSelection === "scissors") {
     if (computerSelection === "rock") {
       console.log("Computer won");
-      ++computerScore;
+      computerScore += 1;
       return computerScore;
     } else {
       console.log("Player won");
-      ++playerScore;
+      playerScore += 1;
       return playerScore;
     }
   } else if (playerSelection === "paper") {
     if (computerSelection === "scissors") {
       console.log("Computer won");
-      ++computerScore;
+      computerScore += 1;
       return computerScore;
     } else {
       console.log("Player won");
-      ++playerScore;
+      playerScore += 1;
       return playerScore;
     }
   }
 }
 
-//plays 5 round of playRound and displays result for each round
-function game(computerScore, playerScore) {
-  for (let round = 1; round < 6; round++) {
-    const computerSelection = computerPlay();
-    const playerSelection = playerPlay();
-    console.log(playRound(playerSelection, computerSelection));
-  }
-  if (computerScore > playerScore) {
-    console.log("Winner for this game: COMPUTER");
-  }
-  if (playerScore > computerScore) {
-    console.log("Winner for this game: PLAYER");
-  }
-  if (computerScore === playerScore) {
-    console.log("There is no winner for this game: TIE GAME");
-  }
-}
+//event listener to the buttons that call playRound function with the correct playerSelection
+const rock = document.getElementById("rock");
+const paper = document.getElementById("paper");
+const scissors = document.getElementById("scissors");
