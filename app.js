@@ -14,7 +14,7 @@ scoreBox.appendChild(cScore);
 
 //displays round result UI
 const resultBox = document.querySelector(".result-box");
-const gameResult = document.createElement("h3");
+const gameResult = document.createElement("p");
 resultBox.appendChild(gameResult);
 
 //game logic
@@ -70,39 +70,35 @@ function updateChoices(playerSelection, computerSelection) {
       cChoice.textContent = "Computer chose ✌️";
       break;
   }
+  playRound(playerSelection, computerSelection);
 }
 
 //plays a single round (main game logic)
 function playRound(playerSelection, computerSelection) {
-  playerSelection = playerPlay();
-  computerSelection = computerPlay();
+  //tie
   if (playerSelection === computerSelection) {
-    displayResult("Tie");
-  } else if (playerSelection === "rock") {
-    if (computerSelection === "paper") {
-      displayResult("Computer won");
-      computerScore += 1;
-    } else {
-      displayResult("Player won");
-      playerScore += 1;
-    }
-  } else if (playerSelection === "scissors") {
-    if (computerSelection === "rock") {
-      displayResult("Computer won");
-      computerScore += 1;
-    } else {
-      displayResult("Player won");
-      playerScore += 1;
-    }
-  } else if (playerSelection === "paper") {
-    if (computerSelection === "scissors") {
-      displayResult("Computer won");
-      computerScore += 1;
-    } else {
-      displayResult("Player won");
-      playerScore += 1;
-    }
+    roundWinner == "tie";
   }
+  //player wins
+  if (
+    (playerSelection === "rock" && computerSelection === "scissors") ||
+    (playerSelection === "scissors" && computerSelection === "paper") ||
+    (playerSelection === "paper" && computerSelection === "rock")
+  ) {
+    ++playerScore;
+    roundWinner = "player";
+  }
+  //computer wins
+  if (
+    (computerSelection === "rock" && playerSelection === "scissors") ||
+    (computerSelection === "scissors" && playerSelection === "paper") ||
+    (computerSelection === "paper" && playerSelection === "rock")
+  ) {
+    ++computerScore;
+    roundWinner = "computer";
+  }
+  updateScore(roundWinner, computerScore, playerScore);
+  isGameOver();
 }
 
 function updateScore() {

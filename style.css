@@ -15,6 +15,14 @@ p{
     font-size: 30px;
 }
 
+.score-box {
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+
+}
 .buttons {
     border: none;
     background-color: transparent;
