@@ -1,27 +1,3 @@
-//displays computer and player's selection UI
-const selection = document.querySelector(".selection");
-const pChoice = document.createElement("p");
-const cChoice = document.createElement("p");
-selection.appendChild(cChoice);
-selection.appendChild(pChoice);
-
-//displays score UI
-const scoreBox = document.querySelector(".score-box");
-const pScore = document.createElement("h4");
-const cScore = document.createElement("h4");
-scoreBox.appendChild(pScore);
-scoreBox.appendChild(cScore);
-
-//displays round result UI
-const resultBox = document.querySelector(".result-box");
-const gameResult = document.createElement("p");
-resultBox.appendChild(gameResult);
-
-//game logic
-let playerScore = 0;
-let computerScore = 0;
-let roundWinner = "";
-
 //computer selection - randomly selects either rock, paper, or scissors
 function computerPlay() {
   const items = ["rock", "paper", "scissors"];
@@ -44,6 +20,13 @@ function handleClick(playerSelection) {
   updateChoices(playerSelection, computerSelection);
   updateScore();
 }
+
+//displays computer and player's selection UI
+const selection = document.querySelector(".selection");
+const pChoice = document.createElement("p");
+const cChoice = document.createElement("p");
+selection.appendChild(cChoice);
+selection.appendChild(pChoice);
 
 //displays player selection and computer selection
 function updateChoices(playerSelection, computerSelection) {
@@ -73,6 +56,11 @@ function updateChoices(playerSelection, computerSelection) {
   playRound(playerSelection, computerSelection);
 }
 
+//game logic
+let playerScore = 0;
+let computerScore = 0;
+let roundWinner = "";
+
 //plays a single round (main game logic)
 function playRound(playerSelection, computerSelection) {
   //tie
@@ -98,21 +86,46 @@ function playRound(playerSelection, computerSelection) {
     roundWinner = "computer";
   }
   updateScore(roundWinner, computerScore, playerScore);
-  isGameOver();
+  isGameOver(computerScore, playerScore);
 }
 
+//displays score UI
+const scoreBox = document.querySelector(".score-box");
+const pScore = document.createElement("h4");
+const cScore = document.createElement("h4");
+scoreBox.appendChild(pScore);
+scoreBox.appendChild(cScore);
+
+//displays each round result
+const roundResult = document.createElement("p");
+scoreBox.appendChild(roundResult);
+
+//updates score based on playRound
 function updateScore() {
   if (roundWinner === "tie") {
-    gameResult.textContent = "Tie!";
+    roundResult.textContent = "Tie!";
   } else if (roundWinner === "player") {
-    gameResult.textContent === "Player won!";
+    roundResult.textContent === "Player won!";
   } else if (roundWinner === "computer") {
-    gameResult.textContent === "Computer Won!";
+    roundResult.textContent === "Computer Won!";
   }
   pScore.textContent = `Player: ${playerScore}`;
   cScore.textContent = `Computer: ${computerScore}`;
 }
 
+//displays the game result after 5 rounds UI
+const gameResultBox = document.querySelector(".game-result-box");
+const gameResult = document.createElement("h2");
+gameResultBox.appendChild(gameResult);
+
+//ends game after 5 rounds
 function isGameOver() {
-  return playerScore === 5 || computerScore == 5;
+  if (playerScore === 5 || computerScore == 5) {
+    resetGame();
+  }
+}
+
+function resetGame() {
+  playerScore = 0;
+  computerScore = 0;
 }
