@@ -116,11 +116,20 @@ function updateScore() {
 //displays the game result after 5 rounds UI
 const gameResultBox = document.querySelector(".game-result-box");
 const gameResult = document.createElement("h2");
-gameResultBox.appendChild(gameResult);
 
 //ends game after 5 rounds
 function isGameOver() {
   if (playerScore === 5 || computerScore == 5) {
+    if (playerScore > computerScore) {
+      gameResult.textContent = "Player won this game!";
+      gameResultBox.appendChild(gameResult);
+    } else if (computerScore > playerScore) {
+      gameResult.textContent = "Computer won this game!";
+      gameResultBox.appendChild(gameResult);
+    } else {
+      gameResult.textContent = "Tie game!";
+      gameResultBox.appendChild(gameResult);
+    }
     resetGame();
   }
 }
